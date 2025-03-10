@@ -62,11 +62,13 @@ def combine_code_files(root_dir, output_file, exclude_patterns=None, include_pat
                     try:
                         with open(filepath, 'r', encoding='utf-8') as infile:
                             content = infile.read()
+                            print(f"Reading: {infile.name}")
                     except UnicodeDecodeError:
                         try:
                             # Try with different encoding
                             with open(filepath, 'r', encoding='latin-1') as infile:
                                 content = infile.read()
+                                print(f"Reading: {infile.name}")
                         except UnicodeDecodeError:
                             print(f"Skipping binary or unreadable file: {rel_path}")
                             skipped_count += 1
@@ -120,6 +122,7 @@ if __name__ == "__main__":
             "*.png",
             "*.gif",
             "*.pdf",
+            "*.ico",
             ".env"
         ],
         help="File patterns to exclude."
